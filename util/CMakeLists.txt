@@ -246,7 +246,7 @@ endif()
 
 if(LINUX OR ANDROID)
     target_sources(crashpad_util PRIVATE
-        net/http_transport_socket.cc
+        net/http_transport_libcurl.cc
         linux/address_types.h
         linux/auxiliary_vector.cc
         linux/auxiliary_vector.h
