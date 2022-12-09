@@ -245,6 +245,8 @@ if(ANDROID)
 endif()
 
 if(LINUX OR ANDROID)
+    find_package(CURL REQUIRED)
+    
     target_sources(crashpad_util PRIVATE
         net/http_transport_libcurl.cc
         linux/address_types.h
