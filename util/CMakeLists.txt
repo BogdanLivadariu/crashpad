@@ -245,7 +245,14 @@ if(ANDROID)
 endif()
 
 if(LINUX OR ANDROID)
-    find_package(CURL REQUIRED)
+    if (LINUX)
+        find_package(CURL REQUIRED)
+        target_include_directories(crashpad_util PRIVATE ${CURL_INCLUDE_DIRS})
+        target_link_libraries(crashpad_util PRIVATE ${CURL_LIBRARIES})
+        SET(HTTP_TRANSPORT_IMPL net/http_transport_libcurl.cc)
+    else()
+        SET(HTTP_TRANSPORT_IMPL net/http_transport_socket.cc)
+    endif()
     
     target_sources(crashpad_util PRIVATE
         net/http_transport_libcurl.cc
